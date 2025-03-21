@@ -4,7 +4,7 @@ function getComputerChoice() {
 
     //let choices = ["rock", "paper", "scissors"]
     let result = Math.floor(Math.random()*3)+1;
-console.log(result)
+
     if (result == 1) {
         //return choices.at(0)
         return "rock"
@@ -25,7 +25,7 @@ console.log(result)
 function getHumanChoice() {
     //Ask for a number between one and 3
 
-    let chosenNumber = prompt("Choose a number between 1 and 3")
+    let textEntry = prompt("Enter 'rock', 'paper' or 'scissors'")
 
     //Check what the number is
 
@@ -42,38 +42,76 @@ function getHumanChoice() {
             console.log("looks like someone doesn't know how to count very well, huh?")
     } 
             */
-           return chosenNumber;
+           
+           console.log(textEntry)
+          // return textEntry.toLowerCase();
+          return textEntry
 }
+
+//console.log('After getHumanChoice function: '+getHumanChoice())
 
 let humanScore = 0
 let computerScore = 0
 
-function playRound() {
+function playRound(humanSelection , computerSelection ) {
 
-    let humanChoice = getHumanChoice();
-    let computerChoice = getComputerChoice();
-    let humanChoiceLowerCase = humanChoice.toLowerCase
-
-
-    let humanWins = () => {
-        console.log (`${humanChoice} beats ${computerChoice}. You get a point!`)
-        humanScore = humanScore++
-    }
-
-    let computerWins = () => {
-        console.log(`${computerChoice} beats ${humanChoice}. You lose!`)
-        computerScore = computerScore++
-    }
-
+    let humanChoice = getHumanChoice()
    
+    let computerChoice = getComputerChoice();
+   
+   
+
+
+    //function humanWins() {
+      //  console.log (`${humanChoice} beats ${computerChoice}. You get a point!`)
+       // humanScore = humanScore++
+  //  }
+
+   // function computerWins() {
+   //     console.log(`${computerChoice} beats ${humanChoice}. You lose!`)
+   //     computerScore = computerScore++
+   // }
+
+   console.log(`Your choice: ${humanChoice}, Computer's choice: ${computerChoice}`)
+
 if (humanChoice == computerChoice) {
     console.log("It's a tie. No points")
-} else if ((humanChoice == "rock" && computerChoice == "paper") || (humanChoice == "paper" && computerChoice == "scissors") || (humanChoice == "scissors" && computerChoice == "rock")) {
-    computerWins
-} else if ((humanChoice == "rock" && computerChoice == "scissors")|| (humanChoice == "paper" && computerChoice == "rock") || (humanChoice == "scissors" && computerChoice == "paper")) {
-    humanWins
-}
-
+} else if ((humanChoice == "rock" && computerChoice =="paper") || (humanChoice == "paper" && computerChoice == "scissors") || (humanChoice == "scissors" && computerChoice == "rock")) {
+    console.log(`${computerChoice} beats ${humanChoice}. You lose!`)
+        computerScore = computerScore+1
        
+} else if ((humanChoice == "rock" && computerChoice == "scissors")|| (humanChoice == "paper" && computerChoice == "rock") || (humanChoice == "scissors" && computerChoice == "paper")) {
+    console.log (`${humanChoice} beats ${computerChoice}. You get a point!`)
+    humanScore = humanScore+1
+    
+    return humanScore
+} else {console.log('Hmmm. something went wrong')}
+
 
 }
+
+const humanInput = getHumanChoice()  
+const computerInput = getComputerChoice()
+
+function playGame() {
+   for (let i = 0; i < 5; i++) {
+    console.log(`ROUND ${i+1}! LET'S GO!!!`)
+    playRound(humanInput, computerInput);
+    console.log(`Round ${i+1}- You: ${humanScore} | Computer: ${computerScore}`)
+   }
+
+   if (computerScore > humanScore) {
+    console.log("Bad luck. You lost the game")
+   } else 
+   if (computerScore < humanScore) {
+    console.log("Congratulations! You won!")
+   } else {
+    console.log("Well would you look at that! It's a tie")
+   }
+computerScore = 0
+humanScore = 0
+
+
+
+}
+
