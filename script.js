@@ -94,11 +94,11 @@ const humanInput = getHumanChoice()
 const computerInput = getComputerChoice()
 
 function playGame() {
-   for (let i = 0; i < 5; i++) {
-    console.log(`ROUND ${i+1}! LET'S GO!!!`)
+   //for (let i = 0; i < 5; i++) {
+   // console.log(`ROUND ${i+1}! LET'S GO!!!`)
     playRound(humanInput, computerInput);
-    console.log(`Round ${i+1}- You: ${humanScore} | Computer: ${computerScore}`)
-   }
+   // console.log(`Round ${i+1}- You: ${humanScore} | Computer: ${computerScore}`)
+  // }
 
    if (computerScore > humanScore) {
     console.log("Bad luck. You lost the game")
