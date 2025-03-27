@@ -16,7 +16,7 @@ const scoreUpdate = document.createElement("p");
 const humanWinsMessage = "Congratulations! You won!";
 const computerWinsMessage = "Bad luck. You lose";
 const tieMessage = "Ooooh. It's a tie...";
-
+const startButton = document.querySelector("#start")
 
 
 const resultPara = document.createElement("p");
@@ -55,7 +55,9 @@ function getComputerChoice() {
   selection.textContent = "something went wrong...";
 }
 
-while (computerScore < 5 || humanScore < 5) {
+
+
+
 
 
 rock.addEventListener("click", () => {
@@ -77,7 +79,8 @@ scissors.addEventListener("click", () => {
     console.log(humanChoice);
 });
 
-}
+
+
 
 function playRound() {
   //let humanChoice = getHumanChoice();
@@ -112,15 +115,42 @@ function playRound() {
   } else {
     console.log("Hmmm. something went wrong");
   }
+  if ((humanScore||computerScore)<5) {
   scoreUpdate.textContent = `You: ${humanScore} | Computer: ${computerScore}`
+  } else if (humanScore===5 || computerScore===5){
+  scoreUpdate.textContent = `You: ${humanScore} | Computer: ${computerScore}`;
+  results.appendChild(resultPara)
+    results.removeChild(selection)
+    results.removeChild(roundResult)
+    
+    if (computerScore > humanScore) {
+      resultPara.textContent = computerWinsMessage;
+      console.log("GAME OVER!!! Bad luck. You lost the game");
+     
+    } else if (computerScore < humanScore) {
+      resultPara.textContent = humanWinsMessage;
+      console.log("Congratulations! You won!");
+     
+      
+    } else {
+      resultPara.textContent = tieMessage;
+      console.log("Well would you look at that! It's a tie");
+    
+      
+    } 
+      }
+     
+  
+  
 }
+
+
+
 
 
 
 function playGame() {
 
-    humanScore = 0;
-    computerScore = 0;
   
     //for (let i = 0; i < 5; i++) {
     // console.log(`ROUND ${i+1}! LET'S GO!!!`)
@@ -130,21 +160,11 @@ function playGame() {
     
   
 
-  if (computerScore > humanScore) {
-    resultPara.textContent = computerWinsMessage;
-    console.log("Bad luck. You lost the game");
-    results.appendChild(resultPara)
-  } else if (computerScore < humanScore) {
-    resultPara.textContent = humanWinsMessage;
-    console.log("Congratulations! You won!");
-    results.appendChild(resultPara)
-  } else {
-    resultPara.textContent = tieMessage;
-    console.log("Well would you look at that! It's a tie");
-    results.appendChild(resultPara)
-  }
-
+  
 }
+
+
+
 
 //DOM Stuff
 
