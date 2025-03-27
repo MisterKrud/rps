@@ -1,173 +1,151 @@
-console.log("Hello world!")
+console.log("Hello world!");
 
-
-
-function getComputerChoice() {
-
-    const selection = document.createElement("p");
-
-    //let choices = ["rock", "paper", "scissors"]
-    let result = Math.floor(Math.random()*3)+1;
-
-    if (result == 1) {
-        //return choices.at(0)
-        return "rock"
-        selection.textContent = "Computer selects Rock!"
-        
-    } else 
-    if (result == 2) {
-       // return choices.at(1)
-        return "paper"
-        selection.textContent = "Computer selects Paper!"
-    } else
-    if (result == 3 ) {
-        //return choices.at(2)
-       return "scissors"
-       selection.textContent = "Computer selects Scissors!"
-    } else
-    {console.log("Someone messed up")}
-    selection.textContent = "something went wrong...";
-
-
-}
-
-function getHumanChoice() {
-    //Ask for a number between one and 3
-
-    let textEntry = prompt("Enter 'rock', 'paper' or 'scissors'")
-
-    //Check what the number is
-
-   
-/*if (chosenNumber == 1) {
-    return "rock"
-} else if 
-     (chosenNumber == 2) {
-        return "paper"
-    } else if 
-         (chosenNumber == 3) {
-            return "scissors"
-        } else {
-            console.log("looks like someone doesn't know how to count very well, huh?")
-    } 
-            */
-           
-           console.log(textEntry)
-          // return textEntry.toLowerCase();
-          return textEntry
-}
-
-//console.log('After getHumanChoice function: '+getHumanChoice())
-
-let humanScore = 0
-let computerScore = 0
-
-function playRound(humanSelection , computerSelection ) {
-
-    let humanChoice = getHumanChoice()
-   
-    let computerChoice = getComputerChoice();
-   
-   
-
-
-    //function humanWins() {
-      //  console.log (`${humanChoice} beats ${computerChoice}. You get a point!`)
-       // humanScore = humanScore++
-  //  }
-
-   // function computerWins() {
-   //     console.log(`${computerChoice} beats ${humanChoice}. You lose!`)
-   //     computerScore = computerScore++
-   // }
-
-   const  choiceText = `Your choice: ${humanChoice}, Computer's choice: ${computerChoice}`
-
-if (humanChoice == computerChoice) {
-    console.log("It's a tie. No points")
-
-} else if ((humanChoice == "rock" && computerChoice =="paper") || (humanChoice == "paper" && computerChoice == "scissors") || (humanChoice == "scissors" && computerChoice == "rock")) {
-    console.log(`${computerChoice} beats ${humanChoice}. You lose!`)
-        computerScore = computerScore+1
-       
-} else if ((humanChoice == "rock" && computerChoice == "scissors")|| (humanChoice == "paper" && computerChoice == "rock") || (humanChoice == "scissors" && computerChoice == "paper")) {
-    console.log (`${humanChoice} beats ${computerChoice}. You get a point!`)
-    humanScore = humanScore+1
-    
-    return humanScore
-} else {console.log('Hmmm. something went wrong')}
-
-
-}
-
-const humanInput = getHumanChoice()  
-const computerInput = getComputerChoice()
-
-function playGame() {
-    while (computerScore < 5 || humanScore < 5) {
-   //for (let i = 0; i < 5; i++) {
-   // console.log(`ROUND ${i+1}! LET'S GO!!!`)
-    playRound(humanInput, computerInput);
-   // console.log(`Round ${i+1}- You: ${humanScore} | Computer: ${computerScore}`)
-  // }
-
-    }
-
-   if (computerScore > humanScore) {
-    results.textContent = computerWinsMessage;
-    console.log("Bad luck. You lost the game");
-    
-   } else 
-   if (computerScore < humanScore) {
-    results.textContent = humanWinsMessage;
-    console.log("Congratulations! You won!");
-   } else {
-    results.textContent = tieMessage;
-    console.log("Well would you look at that! It's a tie")
-   }
-computerScore = 0
-humanScore = 0
-
-
-}
-
-
-//DOM Stuff
+let humanScore = 0;
+let computerScore = 0;
 
 const rock = document.querySelector("#rock");
 const paper = document.querySelector("#paper");
 const scissors = document.querySelector("#scissors");
 const results = document.querySelector("#results");
 const choicePara = document.createElement("p");
+const selection = document.createElement("p");
+const roundResult = document.createElement("p");
+const scoreUpdate = document.createElement("p");
 //const gameOverMessage = document.createElement("p");
 
-
-
-
-
-const humanWinsMessage ='Congratulations! You won!';
-const computerWinsMessage = 'Bad luck. You lose';
+const humanWinsMessage = "Congratulations! You won!";
+const computerWinsMessage = "Bad luck. You lose";
 const tieMessage = "Ooooh. It's a tie...";
 
-/*
-switch(resultMessage) {
-    case (computerScore > humanScore):
-        resultPara.textContent = computerWinsMessage;
-        break;
+
+
+const resultPara = document.createElement("p");
+
+
+
+
+
+//human choice
+//function getHumanChoice() {
+  //  return humanChoice;
+   //}
+
+// Computer choice: Rock/Paper/Scissors
+function getComputerChoice() {
+    let result = Math.floor(Math.random() * 3) + 1;
+
+  if (result == 1) {
+    //return choices.at(0)
+    selection.textContent = "Computer selects Rock!";
+    return "rock";
     
-    case (computerScore <humanScore):
-        resultPara.textContent = humanWinsMessage
-        break;
-        
-    default:
-        resultPara.textContent = tieMessage;    
+  } else if (result == 2) {
+    // return choices.at(1)
+    selection.textContent = "Computer selects Paper!";
+    return "paper";
+    
+  } else if (result == 3) {
+    //return choices.at(2)
+    selection.textContent = "Computer selects Scissors!";
+    return "scissors";
+    
+  } else {
+    console.log("Someone messed up");
+  }
+  selection.textContent = "something went wrong...";
 }
-        */
 
-const resultPara = document.createElement("p")
+while (computerScore < 5 || humanScore < 5) {
 
 
-rock.addEventListener('click', playRound);
-paper.addEventListener('click', playRound);
-scissors.addEventListener('click', playRound);
+rock.addEventListener("click", () => {
+    humanChoice = "rock";
+   
+    playRound();
+    
+});
+paper.addEventListener("click", ()  => {
+    humanChoice = "paper";
+   
+    playRound();
+    console.log(humanChoice);
+});
+scissors.addEventListener("click", () => {
+    humanChoice = "scissors"
+    
+    playRound();
+    console.log(humanChoice);
+});
+
+}
+
+function playRound() {
+  //let humanChoice = getHumanChoice();
+
+
+  let computerChoice = getComputerChoice();
+  console.log(computerChoice);
+
+
+  selection.textContent = `Your choice: ${humanChoice}, Computer's choice: ${computerChoice}`;
+  results.appendChild(selection);
+  results.appendChild(roundResult);
+  results.appendChild(scoreUpdate);
+  if (humanChoice == computerChoice) {
+    roundResult.textContent = `You both picked ${humanChoice}. It's a tie. No points`
+  } else if (
+    (humanChoice == "rock" && computerChoice == "paper") ||
+    (humanChoice == "paper" && computerChoice == "scissors") ||
+    (humanChoice == "scissors" && computerChoice == "rock")
+  ) {
+    roundResult.textContent = `${computerChoice} beats ${humanChoice}. You lose!`;
+    computerScore = computerScore + 1;
+  } else if (
+    (humanChoice == "rock" && computerChoice == "scissors") ||
+    (humanChoice == "paper" && computerChoice == "rock") ||
+    (humanChoice == "scissors" && computerChoice == "paper")
+  ) {
+    roundResult.textContent = `${humanChoice} beats ${computerChoice}. You get a point!`;
+    humanScore = humanScore + 1;
+
+    
+  } else {
+    console.log("Hmmm. something went wrong");
+  }
+  scoreUpdate.textContent = `You: ${humanScore} | Computer: ${computerScore}`
+}
+
+
+
+function playGame() {
+
+    humanScore = 0;
+    computerScore = 0;
+  
+    //for (let i = 0; i < 5; i++) {
+    // console.log(`ROUND ${i+1}! LET'S GO!!!`)
+    playRound();
+   
+    console.log(`Round ${i+1}- You: ${humanScore} | Computer: ${computerScore}`)
+    
+  
+
+  if (computerScore > humanScore) {
+    resultPara.textContent = computerWinsMessage;
+    console.log("Bad luck. You lost the game");
+    results.appendChild(resultPara)
+  } else if (computerScore < humanScore) {
+    resultPara.textContent = humanWinsMessage;
+    console.log("Congratulations! You won!");
+    results.appendChild(resultPara)
+  } else {
+    resultPara.textContent = tieMessage;
+    console.log("Well would you look at that! It's a tie");
+    results.appendChild(resultPara)
+  }
+
+}
+
+//DOM Stuff
+
 
