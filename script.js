@@ -115,3 +115,31 @@ humanScore = 0
 
 }
 
+//DOM Stuff
+
+const rock = document.querySelector("#rock");
+const paper = document.querySelector("#paper");
+const scissors = document.querySelector("#scissors");
+const results = document.querySelector("#results");
+
+const humanWinsMessage ='Congratulations! You won!';
+const computerWinsMessage = 'Bad luck. You lose';
+const tieMessage = "Ooooh. It's a tie...";
+
+switch(resultMessage) {
+    case (computerScore > humanScore):
+        resultPara.textContent = computerWinsMessage;
+        break;
+    
+    case (computerScore <humanScore):
+        resultPara.textContent = humanWinsMessage
+        
+}
+
+const resultPara = document.createElement("p")
+
+
+rock.addEventListener('click', playRound);
+paper.addEventListener('click', playRound);
+scissors.addEventListener('click', playRound);
+
