@@ -1,6 +1,10 @@
 console.log("Hello world!")
 
+
+
 function getComputerChoice() {
+
+    const selection = document.createElement("p");
 
     //let choices = ["rock", "paper", "scissors"]
     let result = Math.floor(Math.random()*3)+1;
@@ -8,17 +12,22 @@ function getComputerChoice() {
     if (result == 1) {
         //return choices.at(0)
         return "rock"
+        selection.textContent = "Computer selects Rock!"
         
     } else 
     if (result == 2) {
        // return choices.at(1)
         return "paper"
+        selection.textContent = "Computer selects Paper!"
     } else
     if (result == 3 ) {
         //return choices.at(2)
        return "scissors"
+       selection.textContent = "Computer selects Scissors!"
     } else
     {console.log("Someone messed up")}
+    selection.textContent = "something went wrong...";
+
 
 }
 
@@ -72,10 +81,11 @@ function playRound(humanSelection , computerSelection ) {
    //     computerScore = computerScore++
    // }
 
-   console.log(`Your choice: ${humanChoice}, Computer's choice: ${computerChoice}`)
+   const  choiceText = `Your choice: ${humanChoice}, Computer's choice: ${computerChoice}`
 
 if (humanChoice == computerChoice) {
     console.log("It's a tie. No points")
+
 } else if ((humanChoice == "rock" && computerChoice =="paper") || (humanChoice == "paper" && computerChoice == "scissors") || (humanChoice == "scissors" && computerChoice == "rock")) {
     console.log(`${computerChoice} beats ${humanChoice}. You lose!`)
         computerScore = computerScore+1
@@ -94,26 +104,33 @@ const humanInput = getHumanChoice()
 const computerInput = getComputerChoice()
 
 function playGame() {
+    while (computerScore < 5 || humanScore < 5) {
    //for (let i = 0; i < 5; i++) {
    // console.log(`ROUND ${i+1}! LET'S GO!!!`)
     playRound(humanInput, computerInput);
    // console.log(`Round ${i+1}- You: ${humanScore} | Computer: ${computerScore}`)
   // }
 
+    }
+
    if (computerScore > humanScore) {
-    console.log("Bad luck. You lost the game")
+    results.textContent = computerWinsMessage;
+    console.log("Bad luck. You lost the game");
+    
    } else 
    if (computerScore < humanScore) {
-    console.log("Congratulations! You won!")
+    results.textContent = humanWinsMessage;
+    console.log("Congratulations! You won!");
    } else {
+    results.textContent = tieMessage;
     console.log("Well would you look at that! It's a tie")
    }
 computerScore = 0
 humanScore = 0
 
 
-
 }
+
 
 //DOM Stuff
 
@@ -121,11 +138,18 @@ const rock = document.querySelector("#rock");
 const paper = document.querySelector("#paper");
 const scissors = document.querySelector("#scissors");
 const results = document.querySelector("#results");
+const choicePara = document.createElement("p");
+//const gameOverMessage = document.createElement("p");
+
+
+
+
 
 const humanWinsMessage ='Congratulations! You won!';
 const computerWinsMessage = 'Bad luck. You lose';
 const tieMessage = "Ooooh. It's a tie...";
 
+/*
 switch(resultMessage) {
     case (computerScore > humanScore):
         resultPara.textContent = computerWinsMessage;
@@ -133,8 +157,12 @@ switch(resultMessage) {
     
     case (computerScore <humanScore):
         resultPara.textContent = humanWinsMessage
+        break;
         
+    default:
+        resultPara.textContent = tieMessage;    
 }
+        */
 
 const resultPara = document.createElement("p")
 
